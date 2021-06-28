@@ -1,5 +1,6 @@
 import { all } from 'redux-saga/effects';
 import loginSaga from './login.saga';
+import getProgressions from './progressions.saga';
 import registrationSaga from './registration.saga';
 import PostSetupSaga from './setup.saga';
 import userSaga from './user.saga';
@@ -17,5 +18,6 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     PostSetupSaga(),
+    getProgressions(),
   ]);
 }
