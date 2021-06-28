@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
+import Setup from '../ProgressionSetup/ProgressionSetup';
 
 function App() {
   const dispatch = useDispatch();
@@ -45,6 +46,14 @@ function App() {
           >
             <AboutPage />
           </Route>
+
+          <ProtectedRoute
+            // logged in shows SetupPage else shows LoginPage
+            exact
+            path="/setup"
+          >
+            <Setup />
+          </ProtectedRoute>
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
