@@ -6,7 +6,7 @@ import UserItem from '../UserItem/UserItem';
 function UserPage() {
   const user = useSelector((store) => store.user);
 
-  const yourChordProgressions = useSelector((store) => store.chordProgressions)
+  const yourChordProgressions = useSelector((store) => store.chordProgressionsReducer)
 
   const dispatch = useDispatch();
 
