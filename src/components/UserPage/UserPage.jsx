@@ -1,15 +1,35 @@
 import React from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import React, {useEffect} from 'react';
 
 function UserPage() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
+
+  const yourChordProgressions = useSelector((store) => store.chordProgressions)
+
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    getYourChordProgressions();
+}, []);
+
+  const getYourChordProgressions = () => {
+    dispatch({type: 'FETCH_YOUR_PROGRESSIONS'})
+  }
+
+
   return (
     <div className="container">
-      <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
-      <LogOutButton className="btn" />
+      <h2>Your Chord Progressions </h2>
+      <ul>
+        {yourChordProgressions.map((progression) => {
+          return (
+            <UserItem key={progression.id} progression={progression} />
+          );
+        })}
+      </ul>
+      <button>New Chord Progression</button>
     </div>
   );
 }
