@@ -6,7 +6,16 @@ const router = express.Router();
  * GET route template
  */
 router.get('/', (req, res) => {
-  // GET route code here
+  console.log('req.user.id', req.user.id);
+
+  const queryText = `SELECT * FROM "progression" WHERE user_id = $1`
+
+  pool.query(queryText, [req.user.id])
+  .then((results) => res.send(results.rows))
+    .catch((error) => {
+      console.log('Error making SELECT for your chord progressions:', error);
+      res.sendStatus(500);
+    });
 });
 
 /**
