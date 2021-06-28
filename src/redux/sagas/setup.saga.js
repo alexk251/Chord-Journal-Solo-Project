@@ -5,7 +5,7 @@ function* PostSetup(action) {
     try{
         //send payload from setup page to api/progression
         yield axios.post('/api/progression', action.payload);
-        yield put({ type: 'SET_PROGRESSION_DETAILS' });
+        yield put({ type: 'SET_PROGRESSION_DETAILS', payload:action.payload });
     } catch(error){
         console.log('Error saga axios post request:', error);
     }
