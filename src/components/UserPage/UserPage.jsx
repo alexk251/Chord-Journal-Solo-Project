@@ -1,6 +1,7 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import React, {useEffect} from 'react';
+import UserItem from '../UserItem/UserItem';
 
 function UserPage() {
   const user = useSelector((store) => store.user);
