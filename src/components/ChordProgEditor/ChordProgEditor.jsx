@@ -18,9 +18,9 @@ function ChordProgEditor() {
             <p>{progression.tempo} BPM Time Signature: {progression.beat_per_measure}/{progression.beat_value}</p>
             <button>Add Measure/Chord</button>
             <div>
-                {chords.map((chord) => {
+                {chords?.map((chord, index) => {
                     return (
-                        <EditorChordCard key={chord?.id} chord={chord} />
+                        <EditorChordCard key={chord?.id} chord={chord} index={index} />
                     );
                 })}
             </div>

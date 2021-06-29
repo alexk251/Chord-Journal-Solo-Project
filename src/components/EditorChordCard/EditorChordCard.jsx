@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-function EditorChordCard({chord}) {
+function EditorChordCard({chord, index}) {
 
     const dispatch = useDispatch();
 
@@ -10,10 +10,11 @@ function EditorChordCard({chord}) {
         dispatch({type:'REMOVE_CHORD', payload: chord})
     }
 
+    console.log(index)
 
     return (
         <div>
-            <h1>Chord # {chord?.chord_number}</h1>
+            <h1>Chord # {index +1}</h1>
             <select>
                 <option>{chord?.root_note}</option>
             </select>
