@@ -82,7 +82,7 @@ function Setup() {
         beat_per_measure: 0,
         beat_value: 0
         })
-        dispatch({type: 'ADD_CHORDS', payload: setupChords})
+        dispatch({type: 'ADD_SETUP_CHORDS', payload: setupChords})
         }
     }
     
