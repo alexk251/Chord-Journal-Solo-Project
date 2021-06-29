@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 function Setup() {
     const user = useSelector((store) => store.user);
+    const progression = useSelector((store => store.progression))
 
     const dispatch = useDispatch();
 
@@ -18,6 +19,8 @@ function Setup() {
         beat_per_measure: 0,
         beat_value: 0
     })
+
+    let setupChords = [];
 
     const handleNameChange = (event) => {
         setProgressionSetupDetails({...progressionSetupDetails, progression_name: event.target.value})
@@ -44,6 +47,19 @@ function Setup() {
         console.log(progressionSetupDetails)
     }
 
+    const numberofChordsFunction = (numberOfChords) => {
+        for (let i = 1; i <= (numberOfChords); i++) {
+            setupChords.push({
+                progression_id: progression.id,
+                root_note: 'C',
+                chord_number: i,
+                chord_quality: 'major',
+                octave: '2'
+            });
+        }
+        console.log(setupChords)
+    }
+ 
     const postProgressionSetupDetails = (event) => {
         console.log(progressionSetupDetails);
         if(progressionSetupDetails.progression_name == '' || progressionSetupDetails.amount_of_chords == 0 || progressionSetupDetails.tempo == 0
@@ -52,6 +68,7 @@ function Setup() {
         } else {
         dispatch({type: 'ADD_PROGRESSION', payload: progressionSetupDetails});
         history.push('/editor');
+        numberofChordsFunction(progressionSetupDetails.amount_of_chords)
         setProgressionSetupDetails({
         progression_name: '',
         amount_of_chords: 0,
@@ -60,6 +77,7 @@ function Setup() {
         beat_per_measure: 0,
         beat_value: 0
         })
+        dispatch({type: 'ADD_CHORDS', payload: setupChords})
         }
     }
     
