@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import EditorChordCard from '../EditorChordCard/EditorChordCard'
 
 function ChordProgEditor() {
 
@@ -17,9 +18,9 @@ function ChordProgEditor() {
             <p>{progression.tempo} BPM Time Signature: {progression.beat_per_measure}/{progression.beat_value}</p>
             <button>Add Measure/Chord</button>
             <div>
-                {chords.map((chord) => {
+                {chords?.map((chord) => {
                     return (
-                        <EditorChordCard key={chord.id} chord={chord} />
+                        <EditorChordCard key={chord.progression_id} chord={chord} />
                     );
                 })}
             </div>
