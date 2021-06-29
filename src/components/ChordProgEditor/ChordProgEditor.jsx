@@ -20,7 +20,7 @@ function ChordProgEditor() {
             <div>
                 {chords?.map((chord) => {
                     return (
-                        <EditorChordCard key={chord.progression_id} chord={chord} />
+                        <EditorChordCard key={chord.chord_number} chord={chord} />
                     );
                 })}
             </div>
