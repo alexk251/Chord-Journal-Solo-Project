@@ -1,8 +1,19 @@
+import { useHistory } from 'react-router-dom';
+
+
 function UserItem(props) {
+
+    const history = useHistory();
+
+    const selectProgression = (event) => {
+        history.push('/view');
+    }
     return (
-        <li>
-            <span>{props.progression.progression_name}</span>
-        </li>
+        <div>
+            <span>{props.progression.progression_name}
+                <button onClick={selectProgression}>View / Edit</button>
+            </span>
+        </div>
     )
 }
 

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 
 function Setup() {
@@ -7,13 +8,15 @@ function Setup() {
 
     const dispatch = useDispatch();
 
+    const history = useHistory();
+
     let [progressionSetupDetails, setProgressionSetupDetails] = useState({
         progression_name: '',
-        amount_of_chords: 1,
+        amount_of_chords: 0,
         user_id: user.id ,
-        tempo: 120 ,
-        beat_per_measure: 4,
-        beat_value: 4
+        tempo: 0 ,
+        beat_per_measure: 0,
+        beat_value: 0
     })
 
     const handleNameChange = (event) => {
@@ -42,9 +45,22 @@ function Setup() {
     }
 
     const postProgressionSetupDetails = (event) => {
-        console.log(progressionSetupDetails)
-        dispatch({type: 'ADD_PROGRESSION', payload: progressionSetupDetails})
-
+        console.log(progressionSetupDetails);
+        if(progressionSetupDetails.progression_name == '' || progressionSetupDetails.amount_of_chords == 0 || progressionSetupDetails.tempo == 0
+        || progressionSetupDetails.beat_per_measure == 0 || progressionSetupDetails.beat_value == 0){
+            alert('Fill out the required fields')
+        } else {
+        dispatch({type: 'ADD_PROGRESSION', payload: progressionSetupDetails});
+        history.push('/editor');
+        setProgressionSetupDetails({
+        progression_name: '',
+        amount_of_chords: 0,
+        user_id: user.id ,
+        tempo: 0 ,
+        beat_per_measure: 0,
+        beat_value: 0
+        })
+        }
     }
     
     return (
