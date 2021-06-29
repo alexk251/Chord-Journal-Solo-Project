@@ -18,6 +18,18 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/highest', (req, res) => {
+
+  const queryText = `SELECT * FROM "progression" ORDER BY "id" DESC LIMIT 1`
+
+  pool.query(queryText)
+  .then((results) => res.send(results.rows))
+    .catch((error) => {
+      console.log('Error making SELECT for your highest chord progression id:', error);
+      res.sendStatus(500);
+    });
+});
+
 /**
  * POST route template
  */
