@@ -3,6 +3,7 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import progression from './progression.reducer';
 import chordProgressionsReducer from './chordProgressions.reducer'
+import highestProgIDReducer from './highestProgID.reducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   progression, // will be an object of progression details
   chordProgressionsReducer, // will be an array of chord progressions with details for userpage
+  highestProgIDReducer, // will be an array with just one object in it having highest current progession id
 });
 
 export default rootReducer;

@@ -10,7 +10,7 @@ function Setup() {
     }, []);
 
     const user = useSelector((store) => store.user);
-    const progression = useSelector((store => store.progression))
+    const progression = useSelector((store => store.highestProgIDReducer))
 
     const dispatch = useDispatch();
 
@@ -21,8 +21,8 @@ function Setup() {
         amount_of_chords: 0,
         user_id: user.id ,
         tempo: 0 ,
-        beat_per_measure: 0,
-        beat_value: 0
+        beat_per_measure: 3,
+        beat_value: 4
     })
 
     let setupChords = [];
@@ -55,7 +55,7 @@ function Setup() {
     const numberofChordsFunction = (numberOfChords) => {
         for (let i = 1; i <= (numberOfChords); i++) {
             setupChords.push({
-                progression_id: progression.id,
+                progression_id: ((progression[0].id)+1),
                 root_note: 'C',
                 chord_number: i,
                 chord_quality: 'major',
@@ -68,7 +68,7 @@ function Setup() {
     const postProgressionSetupDetails = (event) => {
         console.log(progressionSetupDetails);
         if(progressionSetupDetails.progression_name == '' || progressionSetupDetails.amount_of_chords == 0 || progressionSetupDetails.tempo == 0
-        || progressionSetupDetails.beat_per_measure == 0 || progressionSetupDetails.beat_value == 0){
+        || progressionSetupDetails.beat_per_measure == 0){
             alert('Fill out the required fields')
         } else {
         dispatch({type: 'ADD_PROGRESSION', payload: progressionSetupDetails});

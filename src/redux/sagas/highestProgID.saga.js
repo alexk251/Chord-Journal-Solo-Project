@@ -14,8 +14,8 @@ function* FetchHighestProg() {
     }
 }
 
-function* getProgressions() {
-    yield takeEvery('FETCH_HIGHEST_PROG', FetchHighestProg;
+function* getHighestProgression() {
+    yield takeEvery('FETCH_HIGHEST_PROG', FetchHighestProg);
   }
 
-  export default FetchHighestProg;
+  export default getHighestProgression;

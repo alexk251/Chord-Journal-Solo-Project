@@ -1,5 +1,5 @@
 import { all } from 'redux-saga/effects';
-import FetchHighestProg from './highestProgID.saga';
+import getHighestProgression from './highestProgID.saga';
 import loginSaga from './login.saga';
 import getProgressions from './progressions.saga';
 import registrationSaga from './registration.saga';
@@ -20,6 +20,6 @@ export default function* rootSaga() {
     userSaga(),
     PostSetupSaga(),
     getProgressions(),
-    FetchHighestProg(),
+    getHighestProgression(),
   ]);
 }
