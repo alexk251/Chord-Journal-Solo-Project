@@ -1,6 +1,7 @@
 import {useSelector, useDispatch} from 'react-redux';
 import React, {useEffect} from 'react';
 import UserItem from '../UserItem/UserItem';
+import { useHistory } from 'react-router-dom'
 
 function UserPage() {
   const user = useSelector((store) => store.user);
@@ -8,6 +9,11 @@ function UserPage() {
   const yourChordProgressions = useSelector((store) => store.chordProgressionsReducer)
 
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const toSetupPage = () => {
+    history.push('/setup')
+  }
 
 
   useEffect(() => {
@@ -29,10 +35,10 @@ function UserPage() {
           );
         })}
       </div>
-      <button>New Chord Progression</button>
+      <button onClick={toSetupPage}>New Chord Progression</button>
     </div>
   );
 }
 
-// this allows us to use <App /> in index.js
+
 export default UserPage;
