@@ -1,18 +1,19 @@
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom'
 
 
-function UserItem(props) {
+function UserItem({progression}) {
 
     const history = useHistory();
 
     const selectProgression = (event) => {
-        history.push('/view');
+        history.push('/view')
     }
+
     return (
         <div>
-            <span>{props.progression.progression_name}
-                <button onClick={selectProgression}>View / Edit</button>
-            </span>
+            <div>{progression.progression_name}
+            <button onClick={selectProgression}>View / Edit</button>
+            </div>
         </div>
     )
 }

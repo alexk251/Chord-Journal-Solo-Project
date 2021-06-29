@@ -22,13 +22,13 @@ function UserPage() {
   return (
     <div className="container">
       <h2>Your Chord Progressions </h2>
-      <ul>
+      <div>
         {yourChordProgressions.map((progression) => {
           return (
             <UserItem key={progression.id} progression={progression} />
           );
         })}
-      </ul>
+      </div>
       <button>New Chord Progression</button>
     </div>
   );
