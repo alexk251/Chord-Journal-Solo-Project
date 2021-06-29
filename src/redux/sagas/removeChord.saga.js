@@ -3,9 +3,10 @@ import axios from 'axios';
 
 function* removeChord(action) {
     try{
-        //send payload from setup page to api/progression
-        yield axios.post('/api/chords', action.payload);
-        yield put({ type: 'FETCH_CHORDS'});
+        //send payload from chord card page to api/chords to delete
+        yield axios.delete(`/api/chords/${action.payload.id}`);
+        console.log(action.payload)
+        yield put({ type: 'FETCH_CHORDS', payload:action.payload.progression_id });
     } catch(error){
         console.log('Error saga axios post setup chords request:', error);
     }
