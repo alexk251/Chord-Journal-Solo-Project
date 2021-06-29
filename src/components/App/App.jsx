@@ -66,7 +66,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows selected Chord progression view else shows LoginPage
+            // logged in shows selected Chord progression editor else shows LoginPage
             exact
             path="/editor"
           >
