@@ -4,6 +4,14 @@ import { useHistory } from 'react-router-dom';
 
 function EditorChordCard({chord}) {
 
+    const dispatch = useDispatch();
+
+    const handleDeleteChord = () => {
+        dispatch({type:'REMOVE_CHORD', payload: chord})
+    }
+
+    const
+
     return (
         <div>
             <h1>Chord # {chord.chord_number}</h1>
@@ -18,7 +26,7 @@ function EditorChordCard({chord}) {
             </select>
             <button>Play Chord</button>
             <h2>{chord.root_note} {chord.chord_quality}</h2>
-            <button>Delete Chord</button>
+            <button onClick={handleDeleteChord}>Delete Chord</button>
 
         </div>
     )
