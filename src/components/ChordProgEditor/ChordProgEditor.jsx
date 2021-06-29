@@ -1,4 +1,12 @@
+import React, {useEffect, useState} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
 function ChordProgEditor() {
+
+    const progression = useSelector((store => store.progression))
+    const chords = useSelector((store => store.chordsReducer))
+
     return (
         <div>
             <h1>Chord-Progression Editor</h1>
@@ -6,15 +14,14 @@ function ChordProgEditor() {
             <button>Return to Home</button>
             <button>Save Chord Progression</button>
             <br/>
-            <p>120 BPM Time Signature: 4/4</p>
+            <p>{progression.tempo} BPM Time Signature: {progression.beat_per_measure}/{progression.beat_value}</p>
             <button>Add Measure/Chord</button>
             <div>
-                {/* will add cards later once reducer is defined with data */}
-                {/* {selectedChords.map((chord) => {
+                {chords.map((chord) => {
                     return (
-                        <ChordCard key={chord.id} chord={chord} />
+                        <EditorChordCard key={chord.id} chord={chord} />
                     );
-                })} */}
+                })}
             </div>
         </div>
     )
