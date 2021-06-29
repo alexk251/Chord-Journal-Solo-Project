@@ -1,9 +1,14 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 
 function Setup() {
+    useEffect(() => {
+        // get highest progression id from backend on page load
+        dispatch({ type: 'FETCH_HIGHEST_PROG' });
+    }, []);
+
     const user = useSelector((store) => store.user);
     const progression = useSelector((store => store.progression))
 
