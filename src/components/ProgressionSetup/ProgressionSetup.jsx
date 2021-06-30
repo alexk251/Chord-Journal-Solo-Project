@@ -16,6 +16,8 @@ function Setup() {
 
     const history = useHistory();
 
+    let [progressionDetailsMade, setProgressionDetailsMade] =useState(true)
+
     let [progressionSetupDetails, setProgressionSetupDetails] = useState({
         progression_name: '',
         amount_of_chords: 0,
@@ -72,23 +74,31 @@ function Setup() {
             alert('Fill out the required fields')
         } else {
         dispatch({type: 'ADD_PROGRESSION', payload: progressionSetupDetails});
-        history.push('/editor');
+        
         numberofChordsFunction(progressionSetupDetails.amount_of_chords)
-        setProgressionSetupDetails({
-        progression_name: '',
-        amount_of_chords: 0,
-        user_id: user.id ,
-        tempo: 0 ,
-        beat_per_measure: 0,
-        beat_value: 0
-        })
-        dispatch({type: 'ADD_SETUP_CHORDS', payload: setupChords})
+            dispatch({type: 'ADD_SETUP_CHORDS', payload: setupChords})
+
+            setProgressionDetailsMade(false)
         }
     }
+
+    const goToEditor = (event) => {
+        setProgressionDetailsMade(true)
+        history.push('/editor');
+
+        setProgressionSetupDetails({
+            progression_name: '',
+            amount_of_chords: 0,
+            user_id: user.id ,
+            tempo: 0 ,
+            beat_per_measure: 0,
+            beat_value: 0
+            })
+            }
     
     return (
         <div>
-            <form onSubmit={postProgressionSetupDetails}>
+            { progressionDetailsMade ? <form onSubmit={postProgressionSetupDetails}>
             <h1>New Chord Progression Setup</h1>
             <h2>Progression Name:</h2>
             <input onChange={handleNameChange} type="text" required placeholder="Progression Name" />
@@ -116,7 +126,19 @@ function Setup() {
             <input onClick={postProgressionSetupDetails} type="submit" value="Begin Editing Chords" />
             <br/>
             <button>Cancel/Return to Home</button>
-            </form>
+            </form> 
+            :
+            <> Review Details 
+            <br />
+            Progression Name
+            {progressionSetupDetails.progression_name}
+            Amount of Chords/Measures
+            {progressionSetupDetails.amount_of_chords}
+            Tempo
+            {progressionSetupDetails.tempo}
+            Time Signature
+            {progressionSetupDetails.beat_per_measure}/{progressionSetupDetails.beat_value}
+             <button onClick={goToEditor}>Go To Editor</button> </>}
             
         </div>
     );
