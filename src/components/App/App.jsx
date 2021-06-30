@@ -23,6 +23,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import './App.css';
 import Setup from '../ProgressionSetup/ProgressionSetup';
 import ChordProgEditor from '../ChordProgEditor/ChordProgEditor';
+import Details from '../Details/Details';
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +55,14 @@ function App() {
             path="/setup"
           >
             <Setup />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows SetupPage else shows LoginPage
+            exact
+            path="/details"
+          >
+            <Details />
           </ProtectedRoute>
 
           <ProtectedRoute

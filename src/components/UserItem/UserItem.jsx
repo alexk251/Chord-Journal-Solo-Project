@@ -1,12 +1,18 @@
 import { useHistory } from 'react-router-dom'
+import React, {useEffect, useState} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 
 
 function UserItem({progression}) {
 
     const history = useHistory();
 
+    const dispatch = useDispatch();
+
     const selectProgression = (event) => {
-        history.push('/view')
+        dispatch({type:'SET_PROGRESSION_DETAILS', payload: progression})
+        dispatch({ type: 'FETCH_CHORDS', payload: progression.id });
+        history.push('/details')
     }
 
     return (

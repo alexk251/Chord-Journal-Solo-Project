@@ -46,4 +46,15 @@ router.delete('/:id', (req, res) => {
 
 });
 
+router.put('/:id', (req, res) => {
+    const chordDetails = req.body;
+    const queryText = `UPDATE "chord" SET "root_note"=$1, "chord_quality"=$2, "octave"=$3 WHERE "id"=$4;`;
+    pool.query(queryText, [chordDetails.note , chordDetails.quality , chordDetails.octave ,req.params.id])
+        .then(() => { res.sendStatus(200); })
+        .catch((err) => {
+            console.log('Error completing UPDATE Chord query', err);
+            res.sendStatus(500);
+        });
+});
+
             module.exports = router;

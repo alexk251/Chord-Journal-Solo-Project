@@ -19,13 +19,15 @@ function EditorChordCard({ chord, index }) {
     let [selectedChord, setCurrentChord] = useState({
         note: chord?.root_note,
         quality: chord?.chord_quality,
-        octave: chord?.octave
+        octave: chord?.octave,
+        id: chord?.id,
+        progression_id: chord?.progression_id
     })
-
+    // if i choose to show intervals
     let [chordIntervalsSpelled, setChordIntervalsSpelled] = useState({
         spelling: ''
     })
-
+    // if i choose to show notes in chord
     let [chordNotesSpelled, setChordNotesSpelled] = useState('');
 
     const dispatch = useDispatch();
@@ -54,6 +56,7 @@ function EditorChordCard({ chord, index }) {
     }
 
     const handleSaveChord = () => {
+        dispatch({ type: 'UPDATE_CHORD', payload: selectedChord})
         setEditNotSelected(true)
     }
 
@@ -123,12 +126,13 @@ function EditorChordCard({ chord, index }) {
 
     return (
         <div>{editnotSelected ? <div>
-            <h1>Chord # {index + 1}</h1>
-            <h2>{chord?.root_note} {chord?.chord_quality}</h2>
+            <h4>Chord # {index + 1}</h4>
+            <h4>{chord?.root_note} {chord?.chord_quality}</h4>
             <button onClick={handleEditChord}>Edit Chord</button>
         </div>
             :
-            <div><h1>Chord # {index + 1}</h1>
+            <div><h4>Chord # {index + 1}</h4>
+                <h5>Root Note:
                 <select onChange={handleNoteChange}>
                     <option>{chord?.root_note}</option>
                     {startNotes.map((notename) => (
@@ -137,6 +141,8 @@ function EditorChordCard({ chord, index }) {
                     </option>
                 ))}
                 </select>
+                </h5>
+                <h5>Type:
                 <select onChange={handleQualityChange}>
                     <option>{chord?.chord_quality}</option>
                     {startChords.map((chord) => (
@@ -145,6 +151,8 @@ function EditorChordCard({ chord, index }) {
                     </option>
                 ))}
                 </select>
+                </h5>
+                <h5>Octave:
                 <select onChange={handleOctaveChange}>
                     <option>{chord?.octave}</option>
                     {octaves.map((octaveRange) => (
@@ -153,8 +161,9 @@ function EditorChordCard({ chord, index }) {
                     </option>
                 ))}
                 </select>
+                </h5>
                 <button onClick={playChord}>Play Chord</button>
-                <h2>{selectedChord.note} {selectedChord.quality}</h2>
+                <h4>{selectedChord.note} {selectedChord.quality}</h4>
                 <button onClick={handleDeleteChord}>Delete Chord</button>
                 <button onClick={handleSaveChord}>Save Chord</button>
             </div>}

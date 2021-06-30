@@ -7,6 +7,7 @@ import getProgressions from './progressions.saga';
 import registrationSaga from './registration.saga';
 import DeleteChord from './removeChord.saga';
 import PostSetupSaga from './setup.saga';
+import updateChordSaga from './updateChord.saga';
 import userSaga from './user.saga';
 
 // rootSaga is the primary saga.
@@ -27,5 +28,6 @@ export default function* rootSaga() {
     PostSetupChords(),
     DeleteChord(),
     getChords(),
+    updateChordSaga(),
   ]);
 }
