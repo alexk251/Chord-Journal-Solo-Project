@@ -1,0 +1,28 @@
+.Card {
+  width: 20em;
+  max-width: 20em;
+}
+
+.MuiCard-root {
+    padding: 2rem;
+    margin: 2rem;
+}
+
+.MuiCard-root {
+    background-color: #add8e6;
+}
+
+body {
+    background-color: #add8e6;
+}
+
+.text-center {
+    text-align: center;
+    align-content: center;
+}
+
+.border {
+    border-style: solid;
+    border-radius: 1em;
+    border-color: #add8e6;
+}

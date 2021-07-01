@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-router.post('/', (req, res) => {
+router.post('/setup', (req, res) => {
 
     const queryText = `INSERT INTO "chord" (progression_id, root_note, chord_number, chord_quality, octave)
       VALUES ($1, $2, $3, $4, $5)`;
@@ -15,6 +15,23 @@ router.post('/', (req, res) => {
             });
     }
     res.sendStatus(201)
+
+});
+
+router.post('/', (req, res) => {
+
+    const queryText = `INSERT INTO "chord" (progression_id, root_note, chord_number, chord_quality, octave)
+      VALUES ($1, $2, $3, $4, $5)`;
+    
+        pool.query(queryText, [req.body.progression_id, req.body.root_note, req.body.chord_number, req.body.chord_quality, req.body.octave])
+        .then((results) => {
+            console.log(`Chord Added`, results)
+            res.sendStatus(201)
+        })
+            .catch((err) => {
+                console.log(`Chord ${req.body.chord_number} ServerSide Post failed: `, err);
+                res.sendStatus(500);
+            });
 
 });
 

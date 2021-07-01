@@ -110,3 +110,11 @@ input {
   margin: 5px;
   margin-bottom: 10px;
 }
+
+.movies {
+    display:flex;
+  align-items:space-between;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  margin: auto;
+}

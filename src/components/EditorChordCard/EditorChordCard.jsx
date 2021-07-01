@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Card from '@material-ui/core/Card';
 
 //imports for chord player
 import { Howler, Howl } from 'howler';
@@ -125,13 +126,19 @@ function EditorChordCard({ chord, index }) {
     console.log(index)
 
     return (
-        <div>{editnotSelected ? <div>
-            <h4>Chord # {index + 1}</h4>
-            <h4>{chord?.root_note} {chord?.chord_quality}</h4>
+        <div>{editnotSelected ? 
+        <Card className="Card">
+            <h2 className='border text-center'>Chord # {index + 1}</h2>
+            <br />
+            <h2 className='border text-center'> {chord?.root_note} {chord?.chord_quality}</h2>
+            <div className='text-center' >
             <button onClick={handleEditChord}>Edit Chord</button>
-        </div>
+            <button onClick={playChord}>Play Chord</button>
+            </div>
+        </Card>
             :
-            <div><h4>Chord # {index + 1}</h4>
+            <Card className="Card className='border text-center"><h4 className='border'>Chord # {index + 1}</h4>
+            <h4 className='border text-center'>{selectedChord.note} {selectedChord.quality}</h4>
                 <h5>Root Note:
                 <select onChange={handleNoteChange}>
                     <option>{chord?.root_note}</option>
@@ -162,11 +169,12 @@ function EditorChordCard({ chord, index }) {
                 ))}
                 </select>
                 </h5>
+                <div className='text-center' >
                 <button onClick={playChord}>Play Chord</button>
-                <h4>{selectedChord.note} {selectedChord.quality}</h4>
                 <button onClick={handleDeleteChord}>Delete Chord</button>
                 <button onClick={handleSaveChord}>Save Chord</button>
-            </div>}
+                </div>
+            </Card>}
 
 
         </div>

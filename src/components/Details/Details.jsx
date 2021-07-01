@@ -16,7 +16,10 @@ function Details() {
 
     return (
         <div>
-            <div>{progression.progression_name}
+            <div><h1>Name: {progression.progression_name}</h1>
+            <h1>Tempo: {progression.tempo}</h1>
+            <h1>Time Signature: {progression.beat_per_measure}/{progression.beat_value}</h1>
+            <h1>Number of Chords/Measures: {progression.amount_of_chords}</h1>
             <button onClick={Next}>Next</button>
             </div>
         </div>
