@@ -9,7 +9,7 @@
 }
 
 .MuiCard-root {
-    background-color: #add8e6;
+    background-color: white;
 }
 
 body {
@@ -25,4 +25,12 @@ body {
     border-style: solid;
     border-radius: 1em;
     border-color: #add8e6;
+}
+
+.theme-color {
+    background-color: #add8e6;
+}
+
+.btn2 {
+    background-color:grey;
 }

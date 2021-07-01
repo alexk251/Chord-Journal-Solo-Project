@@ -1,5 +1,7 @@
 import { useHistory } from 'react-router-dom'
-import {useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
 
 
 function Details() {
@@ -16,12 +18,19 @@ function Details() {
 
     return (
         <div>
-            <div><h1>Name: {progression.progression_name}</h1>
-            <h1>Tempo: {progression.tempo}</h1>
-            <h1>Time Signature: {progression.beat_per_measure}/{progression.beat_value}</h1>
-            <h1>Number of Chords/Measures: {progression.amount_of_chords}</h1>
-            <button onClick={Next}>Next</button>
-            </div>
+            <Card className='text-center'> <h1>Review Details </h1>
+                <h2>Progression Name</h2>
+                {progression.progression_name}
+                <h2>Amount of Chords/Measures</h2>
+                {progression.amount_of_chords}
+                <h2>Tempo</h2>
+                {progression.tempo}
+                <h2>Time Signature</h2>
+                {progression.beat_per_measure}/{progression.beat_value}
+                <br />
+                <br />
+                <Button variant='contained' color='default' onClick={Next}>Next</Button>
+            </Card>
         </div>
     )
 }

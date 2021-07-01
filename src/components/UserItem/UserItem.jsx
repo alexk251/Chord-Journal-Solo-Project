@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom'
-import React, {useEffect, useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
+import Button from '@material-ui/core/Button';
 
 
 function UserItem({progression}) {
@@ -17,8 +17,8 @@ function UserItem({progression}) {
 
     return (
         <div>
-            <div>{progression.progression_name}
-            <button onClick={selectProgression}>View / Edit</button>
+            <div><h3>{progression.progression_name}</h3>
+            <Button variant='contained' color='default' onClick={selectProgression}>View / Edit</Button>
             </div>
         </div>
     )

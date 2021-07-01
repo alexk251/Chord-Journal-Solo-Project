@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
 
 
 function Setup() {
@@ -96,17 +98,29 @@ function Setup() {
             })
             }
     
+
+            const handleHome = () => {
+                history.push('/user');
+            }
     return (
-        <div>
+        <div className='text-center'>
             { progressionDetailsMade ? <form onSubmit={postProgressionSetupDetails}>
+
             <h1>New Chord Progression Setup</h1>
+            <Card>
             <h2>Progression Name:</h2>
             <input onChange={handleNameChange} type="text" required placeholder="Progression Name" />
+            </Card>
+            <Card>
             <h3>Tempo:</h3>
             <input onChange={handleTempoChange} type="number" required min="60" step="10" max="200" /> BPM
+            </Card>
+            <Card>
             <h3>Number of Chords and Measures:</h3>
             <h4>(one chord per measure)</h4>
             <input onChange={handleChordAmountChange} type="number" required min="1" step="1" max="32" />#
+            </Card>
+            <Card>
             <h3>Time Signature</h3>
             <select onChange={handleBeatsChange} required>
                 <option>3</option>
@@ -122,23 +136,25 @@ function Setup() {
                 <option>16</option>
                 <option>32</option>
             </select>
+            </Card>
             <br/>
-            <input onClick={postProgressionSetupDetails} type="submit" value="Begin Editing Chords" />
+            <Button variant='contained' color='default' onClick={postProgressionSetupDetails} type="submit">Begin Editing Chords</Button>
             <br/>
-            <button>Cancel/Return to Home</button>
+            <Button variant='contained' color='default' onClick={handleHome}>Cancel/Return to Home</Button>
             </form> 
             :
-            <> Review Details 
-            <br />
-            Progression Name
+            <Card> <h1>Review Details </h1>
+            <h2>Progression Name</h2>
             {progressionSetupDetails.progression_name}
-            Amount of Chords/Measures
+            <h2>Amount of Chords/Measures</h2>
             {progressionSetupDetails.amount_of_chords}
-            Tempo
+            <h2>Tempo</h2>
             {progressionSetupDetails.tempo}
-            Time Signature
+            <h2>Time Signature</h2>
             {progressionSetupDetails.beat_per_measure}/{progressionSetupDetails.beat_value}
-             <button onClick={goToEditor}>Go To Editor</button> </>}
+            <br />
+            <br />
+             <Button variant='contained' color='default' onClick={goToEditor}>Go To Editor</Button> </Card>}
             
         </div>
     );

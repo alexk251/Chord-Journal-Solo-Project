@@ -1,7 +1,10 @@
 import {useSelector, useDispatch} from 'react-redux';
 import React, {useEffect} from 'react';
 import UserItem from '../UserItem/UserItem';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
+import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
+
 
 function UserPage() {
   const user = useSelector((store) => store.user);
@@ -26,8 +29,9 @@ function UserPage() {
 
 
   return (
-    <div className="container">
-      <h2>Your Chord Progressions </h2>
+    <Card className="container text-center">
+      <h1>Your Chord Progressions</h1>
+      <Button variant='contained' color='default' onClick={toSetupPage}>New Chord Progression</Button>
       <div>
         {yourChordProgressions.map((progression) => {
           return (
@@ -35,8 +39,8 @@ function UserPage() {
           );
         })}
       </div>
-      <button onClick={toSetupPage}>New Chord Progression</button>
-    </div>
+      
+    </Card>
   );
 }
 

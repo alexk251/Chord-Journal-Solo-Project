@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
 
 //imports for chord player
 import { Howler, Howl } from 'howler';
@@ -132,8 +133,8 @@ function EditorChordCard({ chord, index }) {
             <br />
             <h2 className='border text-center'> {chord?.root_note} {chord?.chord_quality}</h2>
             <div className='text-center' >
-            <button onClick={handleEditChord}>Edit Chord</button>
-            <button onClick={playChord}>Play Chord</button>
+            <Button variant='contained' color='default' onClick={handleEditChord}>Edit Chord</Button>
+            <Button variant='contained' color='default' onClick={playChord}>Play Chord</Button>
             </div>
         </Card>
             :
@@ -170,9 +171,9 @@ function EditorChordCard({ chord, index }) {
                 </select>
                 </h5>
                 <div className='text-center' >
-                <button onClick={playChord}>Play Chord</button>
-                <button onClick={handleDeleteChord}>Delete Chord</button>
-                <button onClick={handleSaveChord}>Save Chord</button>
+                <Button variant='contained' color='default' onClick={playChord}>Play Chord</Button>
+                <Button variant='contained' color='default' onClick={handleDeleteChord}>Delete Chord</Button>
+                <Button variant='contained' color='default' onClick={handleSaveChord}>Save Chord</Button>
                 </div>
             </Card>}
 
