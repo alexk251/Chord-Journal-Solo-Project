@@ -21,6 +21,7 @@ function Setup() {
     let [progressionDetailsMade, setProgressionDetailsMade] =useState(true)
 
     let [progressionSetupDetails, setProgressionSetupDetails] = useState({
+        id: ((progression[0]?.id)+1),
         progression_name: '',
         amount_of_chords: 0,
         user_id: user.id ,
