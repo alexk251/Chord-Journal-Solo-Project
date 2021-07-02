@@ -10,7 +10,7 @@ import Timer from './timer.js';
 import { Howler, Howl } from 'howler';
 import { transpose, note, Chord, ChordType } from '@tonaljs/tonal';
 import soundFile2 from './pianosprite.mp3';
-import click from './click2.mp3'
+import click from './click2.mp3';
 
 function ChordProgEditor() {
 
@@ -76,11 +76,20 @@ function ChordProgEditor() {
             PlayChords(chords[current_chord]);
             current_chord++;
         };
+        console.log(click)
+
+        clickHowl.play();
         
         count++;
-        
 
     }
+
+    const clickHowl = new Howl({
+        src: [click],
+        html5: true,
+        format: ['mp3'],
+        autoplay:false
+    });
 
     // logic that plays chords
        //Chord Player Logic starts here

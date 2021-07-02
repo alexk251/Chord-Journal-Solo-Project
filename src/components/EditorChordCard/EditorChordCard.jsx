@@ -9,6 +9,7 @@ import { Howler, Howl } from 'howler';
 import { transpose, note, Chord, ChordType } from '@tonaljs/tonal';
 import soundFile from './pianosprite.mp3';
 
+
 function EditorChordCard({ chord, index }) {
 
     const startNotes = ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F',
@@ -111,7 +112,7 @@ function EditorChordCard({ chord, index }) {
             const chordMidiNUmbers = soundSequence.map(noteName => {
                 return note(noteName).midi;
             });
-            Howler.volume(0.75);
+            Howler.volume(0.20);
             chordMidiNUmbers.forEach(noteMidiNumber => {
                 sound.play(noteMidiNumber.toString());
             })
