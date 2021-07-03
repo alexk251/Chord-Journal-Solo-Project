@@ -68,7 +68,7 @@ function ChordProgEditor() {
         console.log(count);
         console.log(progression.beat_per_measure)
         console.log(chords[current_chord])
-         if (current_chord == (progression.amount_of_chords)-1) {
+         if (current_chord == (chords.length)) {
             current_chord = 0;
         }
         if (count == progression.beat_per_measure) {
