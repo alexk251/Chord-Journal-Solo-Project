@@ -14,22 +14,20 @@ import click from './click2.mp3';
 
 function ChordProgEditor() {
 
+    // establish variables for chord progression player
     let count = 0;
     let current_chord = 0;
     let isRunning = false;
-       // if i choose to show intervals
-       let [chordIntervalsSpelled, setChordIntervalsSpelled] = useState({
-        spelling: ''
-    })
-    // if i choose to show notes in chord
-    let [chordNotesSpelled, setChordNotesSpelled] = useState('');
 
+    // establish dispatch and hisotry to dispatch to sagas and reducers and history to push to different pages
     const dispatch = useDispatch();
     const history = useHistory();
 
+    // establish progression and chords from redux store
     const progression = useSelector((store => store.progression))
     const chords = useSelector((store => store.chordsReducer))
 
+    // establish local state for adding another chord
     let [addChordDetails, setAddChordDetails] = useState({
         progression_id: progression.id,
         root_note: 'C',
@@ -38,16 +36,17 @@ function ChordProgEditor() {
         octave: '2'
     })
 
-    
-
+    // on click add measure add chord dispatch is triggered in sagas
     const handleAddChord = () => {
         dispatch({ type: 'ADD_CHORD', payload: addChordDetails })
     }
 
+    // return user to home page
     const handleHome = () => {
         history.push('/user');
     }
 
+    // on click play progression starts and stops play progression
     const handlePlayProgression = () => {
         count = 0;
         current_chord = 0;
@@ -61,9 +60,10 @@ function ChordProgEditor() {
     }
     }
 
+    // estabishes metronome setup with Timer component
     const metronome = new Timer(playChords, 60000 / (progression.tempo), { immediate: false });
 
-
+    // playchords that is triggered when metronomone starts or stops in handle play progression
     function playChords() {
         console.log(count);
         console.log(progression.beat_per_measure)
@@ -83,7 +83,7 @@ function ChordProgEditor() {
         count++;
 
     }
-
+    // establishes click howl for metronome click
     const clickHowl = new Howl({
         src: [click],
         html5: true,
@@ -105,6 +105,7 @@ function ChordProgEditor() {
         }
     })
 
+        // Play chords logic that accepts a chord to play
     function PlayChords(usedChord) {
         let chordIntervals = Chord.getChord(usedChord.chord_quality, usedChord.root_note).intervals;
         console.log(chordIntervals);
@@ -153,7 +154,7 @@ function ChordProgEditor() {
             <Button variant='contained' color='default' onClick={handleAddChord}>Add Measure/Chord</Button>
             </div>
             <div>
-            <Grid  container spacing={3}>
+            <Grid container spacing={3}>
                 {chords?.map((chord, index) => {
                     return (
                         
