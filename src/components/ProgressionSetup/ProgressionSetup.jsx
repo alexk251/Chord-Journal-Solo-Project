@@ -10,16 +10,16 @@ function Setup() {
         // get highest progression id from backend on page load
         dispatch({ type: 'FETCH_HIGHEST_PROG' });
     }, []);
-
+    // established user and progression from reducer stores
     const user = useSelector((store) => store.user);
     const progression = useSelector((store => store.highestProgIDReducer))
-
+    // establish dispatch to call to sagas and reducers
     const dispatch = useDispatch();
-
+    // establish history to change pages
     const history = useHistory();
-
+    // establish local state of progression details to conditionally rendered
     let [progressionDetailsMade, setProgressionDetailsMade] =useState(true)
-
+    // establish  local state setup progression details
     let [progressionSetupDetails, setProgressionSetupDetails] = useState({
         id: ((progression[0]?.id)+1),
         progression_name: '',
@@ -29,34 +29,34 @@ function Setup() {
         beat_per_measure: 3,
         beat_value: 4
     })
-
+    // empty starting setup chords array for payload of dispatch
     let setupChords = [];
-
+    // tracks name change
     const handleNameChange = (event) => {
         setProgressionSetupDetails({...progressionSetupDetails, progression_name: event.target.value})
         console.log(progressionSetupDetails)
     }
-
+    // tracks chord amount change
     const handleChordAmountChange = (event) => {
         setProgressionSetupDetails({...progressionSetupDetails, amount_of_chords: event.target.value})
         console.log(progressionSetupDetails)
     }
-
+    // tracks tempo change
     const handleTempoChange = (event) => {
         setProgressionSetupDetails({...progressionSetupDetails, tempo: event.target.value})
         console.log(progressionSetupDetails)
     }
-
+    // tracks beat change
     const handleBeatsChange = (event) => {
         setProgressionSetupDetails({...progressionSetupDetails, beat_per_measure: event.target.value})
         console.log(progressionSetupDetails)
     }
-
+    // tracks beat value change
     const handleBeatValueChange = (event) => {
         setProgressionSetupDetails({...progressionSetupDetails, beat_value: event.target.value})
         console.log(progressionSetupDetails)
     }
-
+    // pushes number of chord with details into setupchords array.
     const numberofChordsFunction = (numberOfChords) => {
         for (let i = 1; i <= (numberOfChords); i++) {
             setupChords.push({
@@ -67,28 +67,30 @@ function Setup() {
                 octave: '2'
             });
         }
-        console.log(setupChords)
     }
  
     const postProgressionSetupDetails = (event) => {
-        console.log(progressionSetupDetails);
+        // input validation
         if(progressionSetupDetails.progression_name == '' || progressionSetupDetails.amount_of_chords == 0 || progressionSetupDetails.tempo == 0
         || progressionSetupDetails.beat_per_measure == 0){
             alert('Fill out the required fields')
         } else {
+            // add progression details dispatch to saga
         dispatch({type: 'ADD_PROGRESSION', payload: progressionSetupDetails});
-        
+            // add setup chords  dispatch to saga
         numberofChordsFunction(progressionSetupDetails.amount_of_chords)
             dispatch({type: 'ADD_SETUP_CHORDS', payload: setupChords})
-
+            // conditionally render details page
             setProgressionDetailsMade(false)
         }
     }
 
     const goToEditor = (event) => {
+        // return details render to original state
         setProgressionDetailsMade(true)
+        // go to editor page
         history.push('/editor');
-
+        // reset details for next input
         setProgressionSetupDetails({
             progression_name: '',
             amount_of_chords: 0,
@@ -99,7 +101,7 @@ function Setup() {
             })
             }
     
-
+            // go to user page
             const handleHome = () => {
                 history.push('/user');
             }
