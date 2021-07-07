@@ -7,22 +7,22 @@ import Button from '@material-ui/core/Button';
 
 
 function UserPage() {
-  const user = useSelector((store) => store.user);
-
+  // gets a users chord progressions from the redux store
   const yourChordProgressions = useSelector((store) => store.chordProgressionsReducer)
-
+  // dispatch for sending sagas and reducer requests
   const dispatch = useDispatch();
+  // history for moving to new pages
   const history = useHistory();
-
+  // moves to setup page
   const toSetupPage = () => {
     history.push('/setup')
   }
 
-
+  // on page load get chord progressions
   useEffect(() => {
     getYourChordProgressions();
 }, []);
-
+  // saga/reducer request through dispatch
   const getYourChordProgressions = () => {
     dispatch({type: 'FETCH_YOUR_PROGRESSIONS'})
   }
