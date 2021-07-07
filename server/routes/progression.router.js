@@ -1,11 +1,14 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 /**
- * GET route template
+ * GET progression details
  */
-router.get('/', (req, res) => {
+router.get('/',rejectUnauthenticated, (req, res) => {
   console.log('req.user.id', req.user.id);
 
   const queryText = `SELECT * FROM "progression" WHERE user_id = $1`
@@ -18,7 +21,9 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/highest', (req, res) => {
+
+// get highest progression id
+router.get('/highest',rejectUnauthenticated, (req, res) => {
 
   const queryText = `SELECT * FROM "progression" ORDER BY "id" DESC LIMIT 1`
 
@@ -31,9 +36,9 @@ router.get('/highest', (req, res) => {
 });
 
 /**
- * POST route template
+ * POST setup progression details
  */
-router.post('/', (req, res) => {
+router.post('/',rejectUnauthenticated, (req, res) => {
 
   const queryText = `INSERT INTO "progression" (progression_name, amount_of_chords, user_id, tempo, beat_per_measure, beat_value)
     VALUES ($1, $2, $3, $4, $5, $6)`;

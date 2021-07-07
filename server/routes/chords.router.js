@@ -1,9 +1,12 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
 
-
-router.post('/setup', (req, res) => {
+// add setup chords
+router.post('/setup',rejectUnauthenticated, (req, res) => {
     console.log(req.body)
 
     const queryText = `INSERT INTO "chord" (progression_id, root_note, chord_number, chord_quality, octave)
@@ -21,8 +24,8 @@ router.post('/setup', (req, res) => {
     res.sendStatus(201)
 
 });
-
-router.post('/', (req, res) => {
+// add single chord
+router.post('/',rejectUnauthenticated, (req, res) => {
 
     const queryText = `INSERT INTO "chord" (progression_id, root_note, chord_number, chord_quality, octave)
       VALUES ($1, $2, $3, $4, $5)`;
@@ -39,7 +42,8 @@ router.post('/', (req, res) => {
 
 });
 
-router.get('/', (req, res) => {
+// get all chords from selected progression
+router.get('/',rejectUnauthenticated, (req, res) => {
     console.log('req.user.id', req.user.id);
     console.log(req.query.progression_id)
 
@@ -54,7 +58,8 @@ router.get('/', (req, res) => {
         });
 });
 
-router.delete('/:id', (req, res) => {
+// delete selected chord
+router.delete('/:id',rejectUnauthenticated, (req, res) => {
     console.log()
     const queryText = `DELETE FROM "chord" WHERE id = $1`;
 
@@ -67,7 +72,8 @@ router.delete('/:id', (req, res) => {
 
 });
 
-router.put('/:id', (req, res) => {
+// update selected chord
+router.put('/:id',rejectUnauthenticated, (req, res) => {
     const chordDetails = req.body;
     const queryText = `UPDATE "chord" SET "root_note"=$1, "chord_quality"=$2, "octave"=$3 WHERE "id"=$4;`;
     pool.query(queryText, [chordDetails.note , chordDetails.quality , chordDetails.octave ,req.params.id])
