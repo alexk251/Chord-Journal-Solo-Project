@@ -8,6 +8,7 @@ function* AddSetupChords(action) {
             yield axios.post('/api/chords/setup', action.payload[i]);
             console.log('posting chord', i+1)
         }
+        // fetch new chords for progression
         yield put({ type: 'FETCH_CHORDS', payload:action.payload[0].progression_id });
     } catch(error){
         console.log('Error saga axios post setup chords request:', error);

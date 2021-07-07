@@ -6,6 +6,7 @@ function* removeChord(action) {
         //send payload from chord card page to api/chords to delete
         yield axios.delete(`/api/chords/${action.payload.id}`);
         console.log(action.payload)
+        // fetch chords without deleted chord
         yield put({ type: 'FETCH_CHORDS', payload:action.payload.progression_id });
     } catch(error){
         console.log('Error saga axios post setup chords request:', error);

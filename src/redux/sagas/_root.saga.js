@@ -21,15 +21,15 @@ import userSaga from './user.saga';
 export default function* rootSaga() {
   yield all([
     loginSaga(), // login saga is now registered
-    registrationSaga(),
-    userSaga(),
-    PostSetupSaga(),
-    getProgressions(),
-    getHighestProgression(),
-    PostSetupChords(),
-    DeleteChord(),
-    getChords(),
-    updateChordSaga(),
-    AddChordSaga(),
+    registrationSaga(), // registration saga
+    userSaga(), // user saga
+    PostSetupSaga(), // sends setup data to database
+    getProgressions(),  // gets progression for user from database
+    getHighestProgression(),  // gets highest progression id from database
+    PostSetupChords(),  // post setup chords to database
+    DeleteChord(),  // delete chord from database
+    getChords(),  // get chords from database
+    updateChordSaga(),  // update chord in database
+    AddChordSaga(), // add a chord to chord progression
   ]);
 }
