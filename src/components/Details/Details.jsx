@@ -6,17 +6,20 @@ import Button from '@material-ui/core/Button';
 
 function Details() {
 
-    const history = useHistory();
 
+    //establish hisotry.psuh for use to move to editor page
+    const history = useHistory();
+    // gets progression details from reducer store
     const progression = useSelector((store => store.progression))
 
 
-
+    // on click goes to editor page
     const Next = (event) => {
         history.push('/editor')
     }
 
     return (
+        // displays progression details
         <div>
             <Card className='text-center'> <h1>Review Details </h1>
                 <h2>Progression Name</h2>

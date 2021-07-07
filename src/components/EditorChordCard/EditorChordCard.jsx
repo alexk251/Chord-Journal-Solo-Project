@@ -11,14 +11,14 @@ import soundFile from './pianosprite.mp3';
 
 
 function EditorChordCard({ chord, index }) {
-
+    // establishes start notes for use in drop down selector
     const startNotes = ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F',
         'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb', 'B'];
-
+    // establishes start chords for use in drop down selector
     const startChords = ChordType.names();
-
+    // esabablishes octaves for use in drop down selector
     const octaves = ['1', '2', '3']
-
+    // esabalishes local state for chord details
     let [selectedChord, setCurrentChord] = useState({
         note: chord?.root_note,
         quality: chord?.chord_quality,
@@ -32,32 +32,34 @@ function EditorChordCard({ chord, index }) {
     })
     // if i choose to show notes in chord
     let [chordNotesSpelled, setChordNotesSpelled] = useState('');
-
+    // for dispataching to sagas or reducers
     const dispatch = useDispatch();
-
+    // local state for conditionally rendering the edit features of a card
     let [editnotSelected, setEditNotSelected] = useState(true)
-
+    // handles note change in edit of card
     const handleNoteChange = (event) => {
         setCurrentChord({ ...selectedChord, note: event.target.value })
         console.log(selectedChord)
     }
+    // handles quality change in edit of card
     const handleQualityChange = (event) => {
         setCurrentChord({ ...selectedChord, quality: event.target.value })
         console.log(selectedChord)
     }
+    // handles ocatave change in edit of card
     const handleOctaveChange = (event) => {
         setCurrentChord({ ...selectedChord, octave: event.target.value })
         console.log(selectedChord)
     }
-
+    // handles delete chord dispatch to remove chord
     const handleDeleteChord = () => {
         dispatch({ type: 'REMOVE_CHORD', payload: chord })
     }
-
+    // changes edit chord state to conditionally render edit of chord
     const handleEditChord = () => {
         setEditNotSelected(false)
     }
-
+    // dispatches update chord to sagas and reducers
     const handleSaveChord = () => {
         dispatch({ type: 'UPDATE_CHORD', payload: selectedChord})
         setEditNotSelected(true)
@@ -77,6 +79,7 @@ function EditorChordCard({ chord, index }) {
         }
     })
 
+    // allows to potentially display chord and is used for playing of chord in each card
     function displayAndPlayChord(usedChord) {
         let chordIntervals = Chord.getChord(usedChord.quality, usedChord.note).intervals;
         console.log(chordIntervals);
@@ -118,7 +121,7 @@ function EditorChordCard({ chord, index }) {
             })
         }
     }
-
+    // function that plays chord
     const playChord = (event) => {
         console.log(selectedChord)
         displayAndPlayChord(selectedChord);
