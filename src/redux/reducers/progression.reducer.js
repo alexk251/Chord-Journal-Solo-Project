@@ -1,6 +1,6 @@
 
 
-//'SET_PROGRESSION_DETAILS'
+// set progression details for editor page and details pages
 
 const progressionReducer = (state = {}, action) => {
     switch (action.type) {

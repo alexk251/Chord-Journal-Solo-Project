@@ -1,4 +1,4 @@
-//'SET_CHORDS'
+// set chords of progression selected /setup
 
 const chordsReducer = (state = {}, action) => {
     switch (action.type) {

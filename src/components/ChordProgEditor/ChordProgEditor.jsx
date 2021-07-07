@@ -24,6 +24,7 @@ function ChordProgEditor() {
     const history = useHistory();
 
     // establish progression and chords from redux store
+
     const progression = useSelector((store => store.progression))
     const chords = useSelector((store => store.chordsReducer))
 
@@ -39,6 +40,8 @@ function ChordProgEditor() {
     // on click add measure add chord dispatch is triggered in sagas
     const handleAddChord = () => {
         dispatch({ type: 'ADD_CHORD', payload: addChordDetails })
+        setAddChordDetails({...addChordDetails, chord_number: addChordDetails.chord_number + 1 })
+        
     }
 
     // return user to home page
