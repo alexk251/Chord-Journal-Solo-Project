@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import EditorChordCard from '../EditorChordCard/EditorChordCard'
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
 import './ChordProgEditor.css';
 
 import Timer from './timer.js';
@@ -17,10 +18,14 @@ function ChordProgEditor() {
     // establish variables for chord progression player
     let count = 0;
     let current_chord = 0;
-    let isRunning = false;
-
+    // let isRunning = false;
+    let [isRunning, setIsRunning] = useState(false)
     // establish state for conditionally rendering tempo change
     let [renderChangeTempo, SetrenderChangeTempo] = useState(true)
+
+    
+
+    
 
     // establish dispatch and hisotry to dispatch to sagas and reducers and history to push to different pages
     const dispatch = useDispatch();
@@ -31,6 +36,9 @@ function ChordProgEditor() {
     const progression = useSelector((store => store.progression))
     const chords = useSelector((store => store.chordsReducer))
 
+    // stores local state of tempo
+    let [variableTempoValue, SetVariableTempoValue] = useState(progression.tempo)
+
     // establish local state for adding another chord
     let [addChordDetails, setAddChordDetails] = useState({
         progression_id: progression.id,
@@ -39,6 +47,8 @@ function ChordProgEditor() {
         chord_quality: 'major',
         octave: '2'
     })
+
+    let [chordDisplay, setChordDisplay] = useState(chords[0])
 
     // on click add measure add chord dispatch is triggered in sagas
     const handleAddChord = () => {
@@ -68,8 +78,13 @@ function ChordProgEditor() {
     }
     }
 
-    // stores local state of tempo
-    let [variableTempoValue, SetVariableTempoValue] = useState(progression.tempo)
+    useEffect( () => {
+        metronome.setTempo(variableTempoValue)
+    },[variableTempoValue])
+
+    // estabishes metronome setup with Timer component
+    let [metronome, setMetronome] = useState(new Timer(playChords, 60000 / (variableTempoValue), { immediate: false }))
+    
 
     const handleTempoChange = (event) => {
         SetVariableTempoValue(event.target.value)
@@ -80,17 +95,16 @@ function ChordProgEditor() {
         count = 0;
         current_chord = 0;
     if (!isRunning) {
-        isRunning = true;
+        setIsRunning(true);
         metronome.start();
     } else {
-        isRunning = false;
+        setIsRunning(false);
         metronome.stop();
         
     }
     }
 
-    // estabishes metronome setup with Timer component
-    const metronome = new Timer(playChords, 60000 / (variableTempoValue), { immediate: false });
+    
 
     // playchords that is triggered when metronomone starts or stops in handle play progression
     function playChords() {
@@ -103,6 +117,7 @@ function ChordProgEditor() {
         if (count == progression.beat_per_measure) {
             count = 0;
             PlayChords(chords[current_chord]);
+            setChordDisplay(chords[current_chord]);
             current_chord++;
         };
         console.log(click)
@@ -174,12 +189,18 @@ function ChordProgEditor() {
         <div>
             <h1 className='text-center'>Chord-Progression Editor</h1>
             <div className='text-center'>
+                {!isRunning ?
             <Button onClick={handlePlayProgression} variant='contained' color='default'>Play Chords</Button>
+            :
+            <Button onClick={handlePlayProgression} variant='contained' color='default'>Stop Chords</Button>  
+             }
             <Button onClick={handleHome} variant='contained' color='default'>Return to Home</Button>
             </div>
             <br/>
-            {renderChangeTempo ? 
+            {!isRunning ?
+            (renderChangeTempo ? 
             <p className='text-center'> {variableTempoValue} BPM 
+            
             <Button variant='contained' color='default' onClick={updateTempo}>Update Tempo</Button>
             </p> 
             : <p className='text-center' > <select value={variableTempoValue} onChange={handleTempoChange} required >
@@ -200,20 +221,32 @@ function ChordProgEditor() {
                 <option>200</option>
                 </select>BPM 
             <Button variant='contained' color='default' onClick={saveTempo}>Change and Save Tempo</Button>
-            </p> }
+            </p> ) : 
+            <p className='text-center'> {variableTempoValue} BPM </p>
+             }
             <p className='text-center'>Time Signature: {progression.beat_per_measure}/{progression.beat_value}</p>
             <div className='text-center'>
+             {!isRunning ?   
             <Button variant='contained' color='default' onClick={handleAddChord}>Add Measure/Chord</Button>
+             : <></>}
             </div>
             <div>
             <Grid container spacing={3}>
-                {chords?.map((chord, index) => {
+                {!isRunning ?
+                (chords?.map((chord, index) => {
                     return (
                         
                         <EditorChordCard key={chord?.id} chord={chord} index={index} />
                         
                     );
-                })}
+                }))
+                :
+                <Card className="Card">
+            
+                    <h2 className='border text-center'> {(chordDisplay.root_note)} {(chordDisplay.chord_quality)}</h2>
+            
+                </Card>
+            }
                 </Grid>
             </div>
         </div>
