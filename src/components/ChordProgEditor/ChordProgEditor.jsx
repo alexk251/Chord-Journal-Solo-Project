@@ -57,6 +57,7 @@ function ChordProgEditor() {
         SetrenderChangeTempo(false);
     }
 
+    // update tempo and change conditonal render
     const saveTempo = () => {
         console.log(variableTempoValue)
         SetVariableTempoValue(variableTempoValue)
