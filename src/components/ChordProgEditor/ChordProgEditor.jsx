@@ -19,6 +19,9 @@ function ChordProgEditor() {
     let current_chord = 0;
     let isRunning = false;
 
+    // establish state for conditionally rendering tempo change
+    let [renderChangeTempo, SetrenderChangeTempo] = useState(true)
+
     // establish dispatch and hisotry to dispatch to sagas and reducers and history to push to different pages
     const dispatch = useDispatch();
     const history = useHistory();
@@ -49,6 +52,28 @@ function ChordProgEditor() {
         history.push('/user');
     }
 
+    // conditionally render button for tempo change
+    const updateTempo = () => {
+        SetrenderChangeTempo(false);
+    }
+
+    const saveTempo = () => {
+        console.log(variableTempoValue)
+        SetVariableTempoValue(variableTempoValue)
+        if (variableTempoValue == undefined) {
+            alert('please enter tempo value')
+        }else {
+        SetrenderChangeTempo(true);
+    }
+    }
+
+    // stores local state of tempo
+    let [variableTempoValue, SetVariableTempoValue] = useState(progression.tempo)
+
+    const handleTempoChange = (event) => {
+        SetVariableTempoValue(event.target.value)
+    }
+
     // on click play progression starts and stops play progression
     const handlePlayProgression = () => {
         count = 0;
@@ -64,7 +89,7 @@ function ChordProgEditor() {
     }
 
     // estabishes metronome setup with Timer component
-    const metronome = new Timer(playChords, 60000 / (progression.tempo), { immediate: false });
+    const metronome = new Timer(playChords, 60000 / (variableTempoValue), { immediate: false });
 
     // playchords that is triggered when metronomone starts or stops in handle play progression
     function playChords() {
@@ -152,7 +177,30 @@ function ChordProgEditor() {
             <Button onClick={handleHome} variant='contained' color='default'>Return to Home</Button>
             </div>
             <br/>
-            <p className='text-center'>{progression.tempo} BPM Time Signature: {progression.beat_per_measure}/{progression.beat_value}</p>
+            {renderChangeTempo ? 
+            <p className='text-center'> {variableTempoValue} BPM 
+            <Button variant='contained' color='default' onClick={updateTempo}>Update Tempo</Button>
+            </p> 
+            : <p className='text-center' > <select value={variableTempoValue} onChange={handleTempoChange} required >
+                <option>60</option>
+                <option>70</option>
+                <option>80</option>
+                <option>90</option>
+                <option>100</option>
+                <option>110</option>
+                <option>120</option>
+                <option>130</option>
+                <option>140</option>
+                <option>150</option>
+                <option>160</option>
+                <option>170</option>
+                <option>180</option>
+                <option>190</option>
+                <option>200</option>
+                </select>BPM 
+            <Button variant='contained' color='default' onClick={saveTempo}>Change and Save Tempo</Button>
+            </p> }
+            <p className='text-center'>Time Signature: {progression.beat_per_measure}/{progression.beat_value}</p>
             <div className='text-center'>
             <Button variant='contained' color='default' onClick={handleAddChord}>Add Measure/Chord</Button>
             </div>
