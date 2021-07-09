@@ -15,9 +15,19 @@ import click from './click2.mp3';
 
 function ChordProgEditor() {
 
+    // establishes click howl for metronome click
+    const clickHowl = new Howl({
+        src: [click],
+        html5: true,
+        format: ['mp3'],
+        autoplay:false
+    });
+
     // establish variables for chord progression player
     let count = 0;
     let current_chord = 0;
+
+    
     // let isRunning = false;
     let [isRunning, setIsRunning] = useState(false)
     // establish state for conditionally rendering tempo change
@@ -35,6 +45,8 @@ function ChordProgEditor() {
 
     const progression = useSelector((store => store.progression))
     const chords = useSelector((store => store.chordsReducer))
+
+    let [playingChordsFunction,setPlayingChordsFunction] = useState(playChords)
 
     // stores local state of tempo
     let [variableTempoValue, SetVariableTempoValue] = useState(progression.tempo)
@@ -79,8 +91,9 @@ function ChordProgEditor() {
     }
 
     useEffect( () => {
-        metronome.setTempo(variableTempoValue)
-    },[variableTempoValue])
+        metronome.setTempo(variableTempoValue),
+        setMetronome(new Timer(playChords, 60000 / (variableTempoValue), { immediate: false }))
+    },[variableTempoValue,chords])
 
     // estabishes metronome setup with Timer component
     let [metronome, setMetronome] = useState(new Timer(playChords, 60000 / (variableTempoValue), { immediate: false }))
@@ -93,12 +106,13 @@ function ChordProgEditor() {
     // on click play progression starts and stops play progression
     const handlePlayProgression = () => {
         count = 0;
-        current_chord = 0;
+        current_chord=0;
     if (!isRunning) {
         setIsRunning(true);
         metronome.start();
     } else {
         setIsRunning(false);
+        
         metronome.stop();
         
     }
@@ -112,13 +126,13 @@ function ChordProgEditor() {
         console.log(progression.beat_per_measure)
         console.log(chords[current_chord])
          if (current_chord == (chords.length)) {
-            current_chord = 0;
+         current_chord = 0
         }
         if (count == progression.beat_per_measure) {
             count = 0;
             PlayChords(chords[current_chord]);
             setChordDisplay(chords[current_chord]);
-            current_chord++;
+            current_chord++
         };
         console.log(click)
 
@@ -127,13 +141,7 @@ function ChordProgEditor() {
         count++;
 
     }
-    // establishes click howl for metronome click
-    const clickHowl = new Howl({
-        src: [click],
-        html5: true,
-        format: ['mp3'],
-        autoplay:false
-    });
+    
 
     // logic that plays chords
        //Chord Player Logic starts here
@@ -230,8 +238,10 @@ function ChordProgEditor() {
             <Button variant='contained' color='default' onClick={handleAddChord}>Add Measure/Chord</Button>
              : <></>}
             </div>
-            <div>
-            <Grid container spacing={3}>
+            <div >
+            <Grid container spacing={24}
+      justify="center"
+      style={{ minHeight: '100vh', maxWidth: '100%' }} >
                 {!isRunning ?
                 (chords?.map((chord, index) => {
                     return (
@@ -241,11 +251,13 @@ function ChordProgEditor() {
                     );
                 }))
                 :
-                <Card className="Card">
+                <Grid>
+                <Card align="center" >
             
-                    <h2 className='border text-center'> {(chordDisplay.root_note)} {(chordDisplay.chord_quality)}</h2>
+                    <h1 className='border text-center'> {(chordDisplay.root_note)} {(chordDisplay.chord_quality)}</h1>
             
                 </Card>
+                </Grid>
             }
                 </Grid>
             </div>

@@ -31,6 +31,18 @@ function Setup() {
     })
     // empty starting setup chords array for payload of dispatch
     let setupChords = [];
+
+    const dummySetup = (event) => {
+        setProgressionSetupDetails({
+            ...progressionSetupDetails,
+            progression_name: 'Maj7th Chords',
+        amount_of_chords: 4,
+        tempo: 120 ,
+        beat_per_measure: 4,
+        beat_value: 4
+
+        })
+    }
     // tracks name change
     const handleNameChange = (event) => {
         setProgressionSetupDetails({...progressionSetupDetails, progression_name: event.target.value})
@@ -109,23 +121,23 @@ function Setup() {
         <div className='text-center'>
             { progressionDetailsMade ? <form onSubmit={postProgressionSetupDetails}>
 
-            <h1>New Chord Progression Setup</h1>
+            <h1 onClick={dummySetup}>New Chord Progression Setup</h1>
             <Card>
             <h2>Progression Name:</h2>
-            <input onChange={handleNameChange} type="text" required placeholder="Progression Name" />
+            <input onChange={handleNameChange} value={progressionSetupDetails.progression_name} type="text" required placeholder="Progression Name" />
             </Card>
             <Card>
             <h3>Tempo:</h3>
-            <input onChange={handleTempoChange} type="number" required min="60" step="10" max="200" /> BPM
+            <input onChange={handleTempoChange} value={progressionSetupDetails.tempo} type="number" required min="60" step="10" max="200" /> BPM
             </Card>
             <Card>
             <h3>Number of Chords and Measures:</h3>
             <h4>(one chord per measure)</h4>
-            <input onChange={handleChordAmountChange} type="number" required min="1" step="1" max="32" />#
+            <input onChange={handleChordAmountChange} value={progressionSetupDetails.amount_of_chords} type="number" required min="1" step="1" max="32" />#
             </Card>
             <Card>
             <h3>Time Signature</h3>
-            <select onChange={handleBeatsChange} required>
+            <select onChange={handleBeatsChange} value={progressionSetupDetails.beat_per_measure}  required>
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>

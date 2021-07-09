@@ -1,6 +1,16 @@
 .Card {
   width: 20em;
   max-width: 20em;
+  
+}
+.singleCard {
+    width:100%;
+    display: flex;                  /* 1 */
+    align-items: flex-start;        /* 2 */
+    justify-content: space-between; /* 3 */
+    text-align: center;
+    
+    
 }
 
 .MuiCard-root {
