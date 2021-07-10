@@ -38,7 +38,7 @@ function UserPage() {
         <tr>
           <th><h2>Progression Name</h2></th>
           <th><h2>View/Edit</h2></th>
-          <th><h2>Delete</h2></th>
+          {/* <th><h2>Delete</h2></th> */}
         </tr>
         {yourChordProgressions.map((progression) => {
           return (

@@ -52,3 +52,18 @@ body {
   flex-wrap:wrap;
   margin: auto;
 }
+
+.space-between {
+    display:flex;
+    justify-content: space-between;
+    align-items:space-between;
+}
+
+.right-margin {
+    margin-right:1em;
+}
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

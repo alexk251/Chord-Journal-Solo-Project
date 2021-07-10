@@ -133,17 +133,16 @@ function EditorChordCard({ chord, index }) {
     return (
         <div>{editnotSelected ? 
         <Card className="Card">
-            <h2 className='border text-center'>Chord # {index + 1}</h2>
-            <br />
-            <h2 className='border text-center'> {chord?.root_note} {chord?.chord_quality}</h2>
-            <div className='text-center' >
+            <h2 className='text-center'>Chord # {index + 1}</h2>
+            <h2 className='border text-center container'> {chord?.root_note} {chord?.chord_quality}</h2>
+            <div className='space-between container' >
             <Button variant='contained' color='default' onClick={handleEditChord}>Edit Chord</Button>
             <Button variant='contained' color='default' onClick={playChord}>Play Chord</Button>
             </div>
         </Card>
             :
-            <Card className="Card className='border text-center"><h4 className='border'>Chord # {index + 1}</h4>
-            <h4 className='border text-center'>{selectedChord.note} {selectedChord.quality}</h4>
+            <Card className="Card text-center"><h4>Chord # {index + 1}</h4>
+            <h4 className='border text-center container'>{selectedChord.note} {selectedChord.quality}</h4>
                 <h5>Root Note:
                 <select onChange={handleNoteChange}>
                     <option>{chord?.root_note}</option>
@@ -174,10 +173,10 @@ function EditorChordCard({ chord, index }) {
                 ))}
                 </select>
                 </h5>
-                <div className='text-center' >
-                <Button variant='contained' color='default' onClick={playChord}>Play Chord</Button>
-                <Button variant='contained' color='default' onClick={handleDeleteChord}>Delete Chord</Button>
-                <Button variant='contained' color='default' onClick={handleSaveChord}>Save Chord</Button>
+                <div className='text-center space-between' >
+                <Button variant='contained' color='default' onClick={handleDeleteChord}>Delete</Button>
+                <Button variant='contained' color='default' onClick={playChord}>Play</Button>
+                <Button variant='contained' color='default' onClick={handleSaveChord}>Save</Button>
                 </div>
             </Card>}
 

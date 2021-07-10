@@ -24,9 +24,9 @@ function UserItem({progression}) {
 
     return (
             <tr>
-                <td><h3>{progression.progression_name}</h3></td>
+                <td><h4>{progression.progression_name}</h4></td>
             <td><Button variant='contained' color='default' onClick={selectProgression}>View / Edit</Button></td>
-            <td><Button variant='contained' color='default' onClick={deleteProgression}>Delete</Button></td>
+            {/* <td><Button variant='contained' color='default' onClick={deleteProgression}>Delete</Button></td> */}
             </tr>
     )
 }

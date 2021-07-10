@@ -198,19 +198,19 @@ function ChordProgEditor() {
             <h1 className='text-center'>Chord-Progression Editor</h1>
             <div className='text-center'>
                 {!isRunning ?
-            <Button onClick={handlePlayProgression} variant='contained' color='default'>Play Chords</Button>
+            <Button className='right-margin' onClick={handlePlayProgression} variant='contained' color='default'>Play Chords</Button>
             :
             <Button onClick={handlePlayProgression} variant='contained' color='default'>Stop Chords</Button>  
              }
-            <Button onClick={handleHome} variant='contained' color='default'>Return to Home</Button>
+            {/* <Button onClick={handleHome} variant='contained' color='default'>Return to Home</Button> */}
             </div>
-            <br/>
             {!isRunning ?
             (renderChangeTempo ? 
-            <p className='text-center'> {variableTempoValue} BPM 
+                <div className='text-center flex'>
+           <p className='right-margin'>Tempo: {variableTempoValue} BPM</p>
             
             <Button variant='contained' color='default' onClick={updateTempo}>Update Tempo</Button>
-            </p> 
+                </div>
             : <p className='text-center' > <select value={variableTempoValue} onChange={handleTempoChange} required >
                 <option>60</option>
                 <option>70</option>
