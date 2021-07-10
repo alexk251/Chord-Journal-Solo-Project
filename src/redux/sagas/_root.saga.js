@@ -1,6 +1,7 @@
 import { all } from 'redux-saga/effects';
 import AddChordSaga from './addChord.saga';
 import PostSetupChords from './addSetupChords.saga';
+import DeleteProgression from './deleteProgression.saga';
 import getChords from './getChords.saga';
 import getHighestProgression from './highestProgID.saga';
 import loginSaga from './login.saga';
@@ -31,5 +32,6 @@ export default function* rootSaga() {
     getChords(),  // get chords from database
     updateChordSaga(),  // update chord in database
     AddChordSaga(), // add a chord to chord progression
+    DeleteProgression(), // delete progression from user page table
   ]);
 }

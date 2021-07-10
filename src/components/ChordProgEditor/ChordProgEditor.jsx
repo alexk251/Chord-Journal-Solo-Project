@@ -55,7 +55,7 @@ function ChordProgEditor() {
     let [addChordDetails, setAddChordDetails] = useState({
         progression_id: progression.id,
         root_note: 'C',
-        chord_number: (chords[chords.length-1].chord_number +1),
+        chord_number: ((chords[chords.length-1]?.chord_number) +1),
         chord_quality: 'major',
         octave: '2'
     })

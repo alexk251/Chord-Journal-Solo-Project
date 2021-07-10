@@ -33,16 +33,16 @@ function Setup() {
     let setupChords = [];
 
     const dummySetup = (event) => {
-        setProgressionSetupDetails({
-            ...progressionSetupDetails,
-            id: ((progression[0]?.id)+1),
-            progression_name: 'Maj7th Chords',
-        amount_of_chords: 4,
-        tempo: 120 ,
-        beat_per_measure: 4,
-        beat_value: 4
+        // setProgressionSetupDetails({
+        //     ...progressionSetupDetails,
+        //     id: ((progression[0]?.id)+1),
+        //     progression_name: 'Maj7th Chords',
+        // amount_of_chords: 4,
+        // tempo: 120 ,
+        // beat_per_measure: 4,
+        // beat_value: 4
 
-        })
+        // })
     }
     // tracks name change
     const handleNameChange = (event) => {

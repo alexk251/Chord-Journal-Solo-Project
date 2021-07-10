@@ -17,7 +17,7 @@ router.post('/setup',rejectUnauthenticated, (req, res) => {
             console.log(`Chord Added`, results)
         })  
         .catch((err) => {
-                console.log(`Chord ${req.body[i].chord_number} ServerSide Post failed: `, err);
+                console.log(`Chord ${req.body.chord_number} ServerSide Post failed: `, err);
                 res.sendStatus(500);
             });
     

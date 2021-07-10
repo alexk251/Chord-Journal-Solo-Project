@@ -52,4 +52,20 @@ router.post('/',rejectUnauthenticated, (req, res) => {
 
 });
 
+// delete selected progression
+router.delete('/:id',rejectUnauthenticated, (req, res) => {
+  console.log(req.params.id)
+  const queryText = `DELETE FROM "chord" WHERE progression_id = $1`;
+  const queryText2 = `DELETE FROM "progression" WHERE id = $1`;
+
+  pool.query(queryText, [req.params.id])
+      .then(
+        pool.query(queryText2, [req.params.id])
+      .then((results) => res.status(200).send(`progression and chords deleted with id: ${req.params.id}`)))
+      .catch((error) => {
+          console.log('Error making get/SELECT for your progression:', error);
+          res.sendStatus(500);
+      })
+});
+
 module.exports = router;

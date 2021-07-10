@@ -24,8 +24,6 @@ function Details() {
             <Card className='text-center'> <h1>Review Details </h1>
                 <h2>Progression Name</h2>
                 {progression.progression_name}
-                <h2>Amount of Chords/Measures</h2>
-                {progression.amount_of_chords}
                 <h2>Tempo</h2>
                 {progression.tempo}
                 <h2>Time Signature</h2>
