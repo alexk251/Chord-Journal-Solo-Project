@@ -4,7 +4,7 @@
 ![TOP_LANGUAGE](https://img.shields.io/github/languages/top/scottbromander/the_marketplace.svg?style=flat-square)
 ![FORKS](https://img.shields.io/github/forks/scottbromander/the_marketplace.svg?style=social)
 
-# PROJECT NAME
+# Chord Journal
 
 ## Description
 
@@ -16,7 +16,7 @@ To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.he
 
 ## Screen Shot
 
-![image](https://user-images.githubusercontent.com/54006827/127379187-e4a540cc-8675-4ab1-ba85-c587cf70aab3.png)
+![2021-07-28_13-40-23 (1) copy](https://user-images.githubusercontent.com/54006827/127380901-3ca63cd2-c654-45f7-a58e-8ed09e42ea2c.gif)
 
 
 ### Prerequisites
