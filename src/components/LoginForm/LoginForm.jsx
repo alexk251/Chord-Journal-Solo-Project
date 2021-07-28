@@ -9,8 +9,8 @@ function LoginForm() {
   const dispatch = useDispatch();
 
   const dummyLogin = (event) => {
-    setUsername('BobbyBlue');
-    setPassword('12345')
+    setUsername('Bobby_Blue_Notes');
+    setPassword('Bobby_Blue_Notes')
   }
 
   const login = (event) => {

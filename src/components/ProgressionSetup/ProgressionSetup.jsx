@@ -46,7 +46,7 @@ function Setup() {
     }
     // tracks name change
     const handleNameChange = (event) => {
-        setProgressionSetupDetails({...progressionSetupDetails, progression_name: event.target.value})
+        setProgressionSetupDetails({...progressionSetupDetails, progression_name: event.target.value, id: (progression[0]?.id)+1})
         console.log(progressionSetupDetails)
     }
     // tracks chord amount change
