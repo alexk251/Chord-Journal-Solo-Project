@@ -12,7 +12,7 @@ _Duration: 2 Week Sprint_
 
 As a guitar teacher my students are constantly losing their charts of chords they are studying and in most cases I have to record myself playing each progression if the student wants to play along without me. This app solves the problem of chord chart storage and playback for students to not only study what I give them but find new chord progressions on their own.
 
-To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
+To see the fully functional site, please visit: https://shielded-meadow-86839.herokuapp.com/#/home
 
 ## Screen Shot
 
